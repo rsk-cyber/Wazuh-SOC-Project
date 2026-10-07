@@ -6,7 +6,7 @@
 ![VMware](https://img.shields.io/badge/VMware_Workstation-17.x-607078?style=for-the-badge&logo=vmware&logoColor=white)
 ![MITRE ATT&CK](https://img.shields.io/badge/MITRE-ATT%26CK_Mapped-red?style=for-the-badge)
 
-> A fully functional Security Operations Center (SOC) home lab built to simulate real-world attack scenarios, generate endpoint and authentication telemetry, engineer custom detection rules, monitor file integrity, and execute an end-to-end incident response lifecycle — all monitored through a self-hosted Wazuh SIEM.
+> A fully functional Security Operations Center (SOC) project built to simulate real-world attack scenarios, generate endpoint and authentication telemetry, engineer custom detection rules, monitor file integrity, and execute an end-to-end incident response lifecycle — all monitored through a self-hosted Wazuh SIEM.
 
 ---
 
