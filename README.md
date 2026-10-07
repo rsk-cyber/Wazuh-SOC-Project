@@ -26,7 +26,6 @@
 - [Lessons Learned](#-lessons-learned)
 - [Roadmap](#-roadmap--future-work)
 - [References](#-references)
-- [About Me](#-about-me)
 
 ---
 
@@ -651,16 +650,5 @@ soc-home-lab/
 
 ---
 
-## 👤 About Me
 
-I'm an aspiring **SOC Analyst** actively seeking entry-level or internship opportunities. This lab reflects my commitment to learning the defensive side of security through hands-on engineering — not just theory.
 
-- 📧 **Email:** your.email@example.com
-- 💼 **LinkedIn:** [linkedin.com/in/yourhandle](https://linkedin.com/in/yourhandle)
-- 🐙 **GitHub:** [github.com/yourhandle](https://github.com/yourhandle)
-
-> 💡 *If you're a hiring manager and would like a walkthrough of this lab, I'd be happy to give a live demo. Just reach out.*
-
----
-
-⭐ **If this project helped you build your own SOC lab, drop a star — and feel free to open an issue with questions.**
