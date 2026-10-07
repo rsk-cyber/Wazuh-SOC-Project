@@ -1,4 +1,4 @@
-# 🛡️ SOC Home Lab — Wazuh SIEM, Detection Engineering, FIM & Incident Response
+# 🛡️ SOC PROJECT — Wazuh SIEM, Detection Engineering, FIM & Incident Response
 
 ![Wazuh](https://img.shields.io/badge/Wazuh-v4.x-3C8CBE?style=for-the-badge&logo=wazuh&logoColor=white)
 ![Ubuntu](https://img.shields.io/badge/Ubuntu_Server-22.04_LTS-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
