@@ -3,7 +3,7 @@
 ![Wazuh](https://img.shields.io/badge/Wazuh-v4.x-3C8CBE?style=for-the-badge&logo=wazuh&logoColor=white)
 ![Ubuntu](https://img.shields.io/badge/Ubuntu_Server-22.04_LTS-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
 ![Windows](https://img.shields.io/badge/Windows_10-Pro-0078D6?style=for-the-badge&logo=windows&logoColor=white)
-![VirtualBox](https://img.shields.io/badge/VirtualBox-7.x-183A61?style=for-the-badge&logo=virtualbox&logoColor=white)
+![VMware](https://img.shields.io/badge/VMware_Workstation-17.x-607078?style=for-the-badge&logo=vmware&logoColor=white)
 ![MITRE ATT&CK](https://img.shields.io/badge/MITRE-ATT%26CK_Mapped-red?style=for-the-badge)
 
 > A fully functional Security Operations Center (SOC) home lab built to simulate real-world attack scenarios, generate endpoint and authentication telemetry, engineer custom detection rules, monitor file integrity, and execute an end-to-end incident response lifecycle — all monitored through a self-hosted Wazuh SIEM.
@@ -57,7 +57,7 @@ Threat Simulation → Log Ingestion → Detection Rule → Alert → Triage → 
 ```
                     ┌──────────────────────────────────────────┐
                     │         HOST MACHINE (Hypervisor)        │
-                    │              VirtualBox                  │
+                    │        VMware Workstation Pro 17         │
                     └──────────────────────────────────────────┘
                                        │
                     ┌──────────────────┼──────────────────┐
@@ -82,7 +82,11 @@ Threat Simulation → Log Ingestion → Detection Rule → Alert → Triage → 
               of its own critical system files)
 ```
 
-**Network:** Internal VirtualBox network `192.168.56.0/24` (host-only + NAT for updates).
+**Network:** VMware **VMnet1 (Host-only)** network on `192.168.56.0/24`, plus **VMnet8 (NAT)** for internet access to install packages.
+
+**VMware Networking note:** Configured via **VMware Virtual Network Editor** (`Edit → Virtual Network Editor`). Each VM was given two adapters:
+- **Adapter 1:** Host-only (VMnet1) → isolated `192.168.56.0/24` lab traffic
+- **Adapter 2:** NAT (VMnet8) → outbound internet for updates and package installation
 
 ![Lab Architecture](docs/screenshots/00-lab-architecture.png)
 
@@ -100,7 +104,7 @@ Threat Simulation → Log Ingestion → Detection Rule → Alert → Triage → 
 | **Ubuntu Desktop VM** | Attacker + monitored endpoint | 2 vCPU / 4 GB RAM |
 | **Sysmon** | Enhanced Windows telemetry | v15.x (SwiftOnSecurity config) |
 | **Auditd** | Linux file/process auditing (Linux FIM backend) | Default Ubuntu package |
-| **VirtualBox** | Hypervisor | v7.x |
+| **VMware Workstation Pro** | Hypervisor | v17.x |
 
 **Frameworks referenced:** MITRE ATT&CK, NIST SP 800-61, Cyber Kill Chain.
 
@@ -566,7 +570,7 @@ Authored a formal incident report (see [`docs/INC-2024-001-Investigation.pdf`](d
 | **Incident Response** | NIST SP 800-61 lifecycle; auto-containment via Active Response |
 | **Dashboarding** | Pivot-ready visualizations in Wazuh Dashboard |
 | **Documentation** | Formal incident report with timeline & IOCs |
-| **Networking** | Isolated host-only network for safe attack simulation |
+| **Virtualization** | Designed & deployed multi-VM lab with VMware Workstation, custom VMnet segmentation |
 
 ---
 
@@ -579,8 +583,9 @@ Authored a formal incident report (see [`docs/INC-2024-001-Investigation.pdf`](d
 5. **Time synchronization matters.** Mismatched clocks broke timeline correlation — fixed with NTP on all agents.
 6. **Active Response needs guardrails.** Always include `<timeout>` to prevent permanent lockouts.
 7. **Sysmon is essential on Windows.** Native Security logs alone missed process-level context.
-8. **Reports win interviews.** The investigation report is what gets discussed in interviews.
-9. **Version pinning saves rebuilds.** Wazuh component mismatches broke ingestion once.
+8. **VMware VMnet segmentation is clean.** Using VMnet1 (host-only) for lab traffic and VMnet8 (NAT) for package installs kept the lab isolated while still allowing updates.
+9. **Reports win interviews.** The investigation report is what gets discussed in interviews.
+10. **Version pinning saves rebuilds.** Wazuh component mismatches broke ingestion once.
 
 ---
 
@@ -593,6 +598,7 @@ Authored a formal incident report (see [`docs/INC-2024-001-Investigation.pdf`](d
 - [ ] Build a **Sigma → Wazuh XML** conversion pipeline.
 - [ ] Add a **pfSense** VM for network-level controls and firewall telemetry.
 - [ ] Extend FIM to monitor **SSH authorized_keys** and **sudoers** for persistence detection.
+- [ ] Take **VMware snapshots** before each attack phase for repeatable rollback.
 
 ---
 
@@ -604,6 +610,7 @@ Authored a formal incident report (see [`docs/INC-2024-001-Investigation.pdf`](d
 - [NIST SP 800-61 Rev. 2](https://csrc.nist.gov/publications/detail/sp/800-61/rev-2/final)
 - [SwiftOnSecurity Sysmon Config](https://github.com/SwiftOnSecurity/sysmon-config)
 - [Atomic Red Team](https://github.com/redcanaryco/atomic-red-team)
+- [VMware Workstation Documentation](https://docs.vmware.com/en/VMware-Workstation-Pro/index.html)
 
 ---
 
